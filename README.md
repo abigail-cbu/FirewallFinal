@@ -5,30 +5,30 @@ For your final exam you’ll look at one specific software tool, a firewall.  Pl
 
  1. An Access list to keep URLs
  
-        With a method to add a AccessList
-        And a method to find a AccessList within the access list
+        With a method to add a URL
+        And a method to find a URL within the access list
 
  2. A packet
  
-        Assume the packet format is a AccessList Address (16 characters) followed by the Packet Payload (64 characters)
-        With a method to extract the AccessList address.
+        Assume the packet format is a URL Address (16 characters) followed by the Packet Payload (64 characters)
+        With a method to extract the URL address.
 
- 3. A Log to keep rejected AccessList’s.
+ 3. A Log to keep rejected URL’s.
  
-        With a method that accepts a AccessList and stores it in a Log entry.
+        With a method that accepts a URL and stores it in a Log entry.
         The Log entry should be 16 characters long.
  
 
-Your firewall program should accept a packet as input, extract it’s AccessList
+Your firewall program should accept a packet as input, extract it’s URL
 
-Look up the AccessList in the Access List
+Look up the URL in the Access List
 
     If the AccessList is in the Access List, return the packet
     Otherwise, Report an attempt to penetrate the firewall in the firewall log.
 
  
 
-To test your program use the following AccessList’s for the access list:
+To test your program use the following URL’s for the access list:
 
     128.60.25.3
     127.128.32.5

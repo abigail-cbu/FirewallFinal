@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Description: logs rejected packages,
+ * Description: logs rejected packets,
  * indicating a hacker that is trying to breach the firewall
  */
 public class Logger {
 
-    public List<Object> accessList = new ArrayList<Object>();
+    private List<Object> rejectedList = new ArrayList<Object>();
 
     /**
      * Adds package to list
-     * @param packageList
+     * @param packet
      */
-    public void logReject(Object packageList) {
-        accessList.add(packageList);
+    public void logReject(Object packet) {
+        rejectedList.add(packet);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Logger {
      */
     public void displayRejects() {
         System.out.println("The following are packages that have been rejected:");
-        for(Object reject : accessList) {
+        for(Object reject : rejectedList) {
             System.out.println(reject);
         }
     }
