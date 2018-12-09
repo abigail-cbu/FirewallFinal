@@ -1,27 +1,40 @@
-package AccessList;
+package Firewall;
 
+import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.io.FileOutputStream;
+import java.lang.reflect.Array;
 import java.security.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * AccessList stores salted urls (code from miniPassword.java from Security book)
+ * Firewall stores salted urls (code from miniPassword.java from Security book)
  */
-public class FireWallController {
+public class AccessListController {
 
+    // VARIABLES
     private final int IP_MAX_LENGTH = 16;
-    private List<Object> accessList = new ArrayList<Object>(Arrays.asList(
-            "128.60.25.3",
-            "127.128.32.5",
-            "61.110.4.11"
-    ));
+    private List<Object> accessList = new ArrayList<Object>();
+    private final String SECRET_KEY = "Fire123SecretKey"; // 16 bytes
+    private final String INIT_VECTOR = "RandomInitVector";
+
+    /**
+     * Initializes the saved urls, encrypts them, and adds them to the list
+     *
+     * @throws Exception
+     */
+    public AccessListController() throws Exception {
+        InitialAccessList init = new InitialAccessList();
+
+        String[] initalAddresses = init.initList.split(",");
+        for (String address : initalAddresses) {
+            addUrl(address);
+        }
+    }
+    //PUBLIC METHODS
 
     /**
      * Checks packet against FireWall
@@ -43,7 +56,7 @@ public class FireWallController {
 
     /**
      * Extracts a packet and parses it to get the Address and Payload.
-     * Assumes the packet format is a AccessList Address (16 characters) followed by the Packet Payload (64 characters)
+     * Assumes the packet format is a Firewall Address (16 characters) followed by the Packet Payload (64 characters)
      * example: ip.ljust(16) + ''.join(random.choice(string.ascii_letters) for _ in range(64))
      *
      * @param packet
@@ -60,50 +73,47 @@ public class FireWallController {
     }
 
     /**
-     * Gets url, encode it and then saves it a list.
-     *
-     * @param address
-     * @return true if url was added to the list
-     */
-    private boolean addUrl(String address) throws Exception {
-        // 1. check if valid url / ip address
-
-        // 2. encrypt url
-
-        // 3. add url to AccessList
-        if (accessList.contains(address)) {
-            return true;
-        } else if (validIP(address)) {
-            accessList.add(address);
-            return true;
-        }
-
-        return false; // url wasn't added because it is invalid or already in the list
-    }
-
-    /**
      * Checks if url has access
      *
      * @param address
      * @return true if url is within the access list
      */
-    public boolean hasAccess(String address) {
-        if (accessList.contains(address)) {
+    public boolean hasAccess(String address) throws Exception {
+        // 1. encrypt
+        AESEncrypter encryptor = new AESEncrypter();
+        String encryptAddress = encryptor.encrypt(SECRET_KEY, INIT_VECTOR, address);
+
+        // 2. check if it is AccessList
+        if (accessList.contains(encryptAddress)) {
             return true;
         }
 
         return false;
     }
 
+    // PRIVATE METHODS
+
     /**
-     * returns the SHA-256 hash of the provided preimage as a String
+     * Gets url, encode it and then saves it a list.
+     *
+     * @param address
+     * @return true if url was added to the list
      */
-    private byte[] encodeUrl(String url) throws Exception {
-        MessageDigest md = null;
-        md = MessageDigest.getInstance("SHA-256");
-        md.update(url.getBytes("UTF-8"));
-        byte raw[] = md.digest();
-        return Base64.encodeBase64(raw);
+    private boolean addUrl(String address) throws Exception {
+        if (accessList.contains(address)) {
+            return true;
+        } else if (validIP(address)) {
+            // 1. encrypt
+            AESEncrypter encryptor = new AESEncrypter();
+            String encryptAddress = encryptor.encrypt(SECRET_KEY, INIT_VECTOR, address);
+            System.out.println("encrypted string check: " + encryptAddress);
+
+            // 2. add encrypted ip to Access List
+            accessList.add(encryptAddress);
+            return true;
+        }
+
+        return false; // url wasn't added because it is invalid or already in the list
     }
 
     /**

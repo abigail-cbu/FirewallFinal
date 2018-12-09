@@ -1,4 +1,4 @@
-package AccessList;
+package Firewall;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,10 +11,12 @@ import java.util.List;
  */
 public class Logger {
 
+    // VARIABLES
     // static list that is maintained throughout the project
     private static List<String> rejectedList = new ArrayList<String>();
     private final int IP_MAX_LENGTH = 16;
 
+    // PUBLIC METHODS
     /**
      * Adds package to list
      *

@@ -1,10 +1,11 @@
-package AccessList;
+package Firewall;
+
+import org.apache.commons.codec.binary.Base64;
 
 import java.security.*;
 import java.security.spec.*;
 import javax.crypto.*;
 import javax.crypto.spec.*;
-import java.io.*;
 
 /**
  * Modified form of AESEncrypter from book
@@ -15,7 +16,7 @@ public class AESEncrypter {
     public static final int KEY_SIZE = 16; // 128 bits
     public static final int BUFFER_SIZE = 1024; // 1KB
 
-    Cipher cipher;
+    Cipher CIPHER;
     SecretKey SECRET_KEY;
     AlgorithmParameterSpec ivSpec;
     byte[] buf = new byte[BUFFER_SIZE];
@@ -28,46 +29,45 @@ public class AESEncrypter {
     }
 
     public AESEncrypter() throws Exception {
-        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        CIPHER = Cipher.getInstance("AES/CBC/PKCS5Padding");
     }
 
-    public String encrypt(byte[] urlInBytes, OutputStream out)
-            throws Exception {
+    public String encrypt(String key, String initVector, String value) throws Exception {
+        try {
+            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 
-        // create IV and write to output
-        ivBytes = createRandBytes(IV_SIZE);
-        out.write(ivBytes);
-        ivSpec = new IvParameterSpec(ivBytes);
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
 
-        cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, ivSpec);
+            byte[] encrypted = cipher.doFinal(value.getBytes());
+            //System.out.println("encrypted string: " + Base64.encodeBase64String(encrypted));
 
-        // Bytes written to cipherOut will be encrypted
-        CipherOutputStream cipherOut = new CipherOutputStream(out, cipher);
+            return Base64.encodeBase64String(encrypted);
 
-        // Read in the plaintext bytes and write to cipherOut to encrypt
-        int numRead = 0;
-        cipherOut.write(urlInBytes, 0, numRead);
-        cipherOut.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-        return cipherOut.toString();
+        return null;
     }
 
-    public void decrypt(InputStream in, OutputStream out)
-            throws Exception {
-        // read IV first
-        System.in.read(ivBytes);
-        ivSpec = new IvParameterSpec(ivBytes);
+    public static String decrypt(String key, String initVector, String encrypted) {
+        try {
+            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 
-        cipher.init(Cipher.DECRYPT_MODE, SECRET_KEY, ivSpec);
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 
-        // Bytes read from in will be decrypted
-        CipherInputStream cipherIn = new CipherInputStream(in, cipher);
+            byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));
 
-        // Read in the decrypted bytes and write the plaintext to out
-        int numRead = 0;
-        while ((numRead = cipherIn.read(buf)) >= 0)
-            out.write(buf, 0, numRead);
-        out.close();
+            return new String(original);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 
     public static byte[] createRandBytes(int numBytes)

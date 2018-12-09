@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf1a5265-b36b-4da0-b2db-8f069ae092ab" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Firewall/InitialAccessList.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/AccessList/AESEncrypter.java" afterPath="$PROJECT_DIR$/src/main/java/Firewall/AESEncrypter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/AccessList/FireWallController.java" afterPath="$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/AccessList/Logger.java" afterPath="$PROJECT_DIR$/src/main/java/Firewall/Logger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/MainTest.java" afterPath="$PROJECT_DIR$/src/test/java/MainTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,11 +35,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="69" lean-forward="false" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="165">
+              <caret line="11" column="69" lean-forward="false" selection-start-line="11" selection-start-column="69" selection-end-line="11" selection-end-column="69" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,8 +45,8 @@
       <file leaf-file-name="MainTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/MainTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+            <state relative-caret-position="374">
+              <caret line="35" column="43" lean-forward="true" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,35 +67,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FireWallController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AccessList/FireWallController.java">
+      <file leaf-file-name="AccessListController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+            <state relative-caret-position="364">
+              <caret line="108" column="54" lean-forward="false" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="54" />
               <folding>
-                <element signature="docComment;class#FireWallController#0" expanded="false" />
-                <element signature="docComment;method#checkPacket#0;class#FireWallController#0" expanded="false" />
-                <element signature="docComment;method#addressExtractor#0;class#FireWallController#0" expanded="false" />
-                <element signature="docComment;method#addUrl#0;class#FireWallController#0" expanded="false" />
-                <element signature="e#2020#2057#0" expanded="false" />
-                <element signature="docComment;method#hasAccess#0;class#FireWallController#0" expanded="false" />
-                <element signature="method#hasAccess#0;class#FireWallController#0" expanded="false" />
-                <element signature="docComment;method#encodeUrl#0;class#FireWallController#0" expanded="false" />
-                <element signature="method#encodeUrl#0;class#FireWallController#0" expanded="false" />
-                <element signature="docComment;method#validIP#0;class#FireWallController#0" expanded="false" />
-                <element signature="docComment;method#removeBadCharactersFromIP#0;class#FireWallController#0" expanded="false" />
-                <element signature="method#removeBadCharactersFromIP#0;class#FireWallController#0" expanded="false" />
-                <element signature="e#4885#4923#0" expanded="false" />
+                <element signature="docComment;class#AccessListController#0" expanded="false" />
+                <element signature="docComment;method#checkPacket#0;class#AccessListController#0" expanded="false" />
+                <element signature="docComment;method#addressExtractor#0;class#AccessListController#0" expanded="false" />
+                <element signature="method#addressExtractor#0;class#AccessListController#0" expanded="false" />
+                <element signature="docComment;method#hasAccess#0;class#AccessListController#0" expanded="false" />
+                <element signature="docComment;method#addUrl#0;class#AccessListController#0" expanded="false" />
+                <element signature="docComment;method#validIP#0;class#AccessListController#0" expanded="false" />
+                <element signature="method#validIP#0;class#AccessListController#0" expanded="false" />
+                <element signature="docComment;method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
+                <element signature="method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
+                <element signature="e#5448#5486#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AESEncrypter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AccessList/AESEncrypter.java">
+      <file leaf-file-name="InitialAccessList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/InitialAccessList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="942">
-              <caret line="83" column="2" lean-forward="false" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
+            <state relative-caret-position="105">
+              <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AESEncrypter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AESEncrypter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="735">
+              <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,13 +112,16 @@
         </entry>
       </file>
       <file leaf-file-name="Logger.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AccessList/Logger.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/Logger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="13" column="60" lean-forward="false" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
+            <state relative-caret-position="180">
+              <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#371#379#0" expanded="true" />
+                <element signature="docComment;class#Logger#0" expanded="false" />
+                <element signature="docComment;method#logReject#0;class#Logger#0" expanded="false" />
+                <element signature="method#logReject#0;class#Logger#0" expanded="false" />
+                <element signature="docComment;method#displayRejects#0;class#Logger#0" expanded="false" />
+                <element signature="method#displayRejects#0;class#Logger#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -141,10 +157,14 @@
         <option value="$PROJECT_DIR$/src/main/java/AccessList/AESEncrypter.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/AccessList/AccessController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AccessList/FireWallController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AccessList/Logger.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AccessList/Logger.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AccessList/FireWallController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Firewall/FireWallController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Firewall/InitialAccessList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Firewall/AESEncrypter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java" />
         <option value="$PROJECT_DIR$/src/test/java/MainTest.java" />
       </list>
     </option>
@@ -234,6 +254,27 @@
               <item name="FirewallFinal" type="b2602c69:ProjectViewProjectNode" />
               <item name="FirewallFinal" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FirewallFinal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FirewallFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FirewallFinal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FirewallFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Firewall" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FirewallFinal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FirewallFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -275,11 +316,11 @@
     <configuration name="AESEncrypter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="AccessList.*" />
+          <option name="PATTERN" value="Firewall.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="AccessList.AESEncrypter" />
+      <option name="MAIN_CLASS_NAME" value="Firewall.AESEncrypter" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -457,7 +498,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544316234192</updated>
-      <workItem from="1544316239844" duration="18154000" />
+      <workItem from="1544316239844" duration="20226000" />
     </task>
     <servers />
   </component>
@@ -465,11 +506,23 @@
     <history-entry file="MainTest_testAllTests - 2018.12.09 at 02h 14m 52s.xml">
       <configuration name="MainTest.testAllTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MainTest_testPacketInputs - 2018.12.09 at 01h 30m 18s.xml">
-      <configuration name="MainTest.testPacketInputs" configurationId="JUnit" />
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 39m 46s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MainTest_testPacketInputs - 2018.12.09 at 02h 09m 58s.xml">
-      <configuration name="MainTest.testPacketInputs" configurationId="JUnit" />
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 40m 14s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 41m 41s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 43m 18s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 43m 54s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 44m 58s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
     </history-entry>
     <history-entry file="MainTest_testPacketInputs - 2018.12.09 at 02h 10m 27s.xml">
       <configuration name="MainTest.testPacketInputs" configurationId="JUnit" />
@@ -480,21 +533,9 @@
     <history-entry file="MainTest_testPacketInputs - 2018.12.09 at 02h 13m 26s.xml">
       <configuration name="MainTest.testPacketInputs" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MainTest_testUrls - 2018.12.09 at 01h 30m 10s.xml">
-      <configuration name="MainTest.testUrls" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_testUrls - 2018.12.09 at 01h 31m 35s.xml">
-      <configuration name="MainTest.testUrls" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_testUrls - 2018.12.09 at 02h 03m 17s.xml">
-      <configuration name="MainTest.testUrls" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_testUrls - 2018.12.09 at 02h 04m 18s.xml">
-      <configuration name="MainTest.testUrls" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18154000" />
+    <option name="totallyTimeSpent" value="20226000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -537,7 +578,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -574,27 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AccessList/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="13" column="60" lean-forward="false" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#371#379#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AccessList/AESEncrypter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="942">
-          <caret line="83" column="2" lean-forward="false" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -608,40 +628,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="69" lean-forward="false" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
+        <state relative-caret-position="165">
+          <caret line="11" column="69" lean-forward="false" selection-start-line="11" selection-start-column="69" selection-end-line="11" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+          <folding>
+            <element signature="docComment;class#Logger#0" expanded="false" />
+            <element signature="docComment;method#logReject#0;class#Logger#0" expanded="false" />
+            <element signature="method#logReject#0;class#Logger#0" expanded="false" />
+            <element signature="docComment;method#displayRejects#0;class#Logger#0" expanded="false" />
+            <element signature="method#displayRejects#0;class#Logger#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="108" column="54" lean-forward="false" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="54" />
+          <folding>
+            <element signature="docComment;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#checkPacket#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#addressExtractor#0;class#AccessListController#0" expanded="false" />
+            <element signature="method#addressExtractor#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#hasAccess#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#addUrl#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#validIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="method#validIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="e#5448#5486#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/InitialAccessList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AESEncrypter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AccessList/FireWallController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-          <folding>
-            <element signature="docComment;class#FireWallController#0" expanded="false" />
-            <element signature="docComment;method#checkPacket#0;class#FireWallController#0" expanded="false" />
-            <element signature="docComment;method#addressExtractor#0;class#FireWallController#0" expanded="false" />
-            <element signature="docComment;method#addUrl#0;class#FireWallController#0" expanded="false" />
-            <element signature="e#2020#2057#0" expanded="false" />
-            <element signature="docComment;method#hasAccess#0;class#FireWallController#0" expanded="false" />
-            <element signature="method#hasAccess#0;class#FireWallController#0" expanded="false" />
-            <element signature="docComment;method#encodeUrl#0;class#FireWallController#0" expanded="false" />
-            <element signature="method#encodeUrl#0;class#FireWallController#0" expanded="false" />
-            <element signature="docComment;method#validIP#0;class#FireWallController#0" expanded="false" />
-            <element signature="docComment;method#removeBadCharactersFromIP#0;class#FireWallController#0" expanded="false" />
-            <element signature="method#removeBadCharactersFromIP#0;class#FireWallController#0" expanded="false" />
-            <element signature="e#4885#4923#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/MainTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+        <state relative-caret-position="374">
+          <caret line="35" column="43" lean-forward="true" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -1,13 +1,10 @@
-import AccessList.FireWallController;
-import AccessList.Logger;
-
 /**
  * Abigail Lu
  * CSC 513 - Final
  * Updated: 12/8/2018
  * Description: The goals for this project can be found in the README.md file.
  * Test cases are found in MainTest.java.
- * AccessList is a package that contains FireWallController and Logger
+ * Firewall is a package that contains AccessListController and Logger
  */
 public class Main {
 

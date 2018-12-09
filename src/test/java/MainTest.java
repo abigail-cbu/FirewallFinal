@@ -1,5 +1,5 @@
-import AccessList.FireWallController;
-import AccessList.Logger;
+import Firewall.AccessListController;
+import Firewall.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,21 +7,33 @@ import java.util.Random;
 
 /**
  * Description: MainTest contains JUnits tests that will test the
- * AccessList package
+ * Firewall package
  * and make sure that the project fulfills the requirements stated in the README.md file
  *
  * Output:
  Testing known URLS:
+ encrypted string check: HiTpyY6MQaymlIYTjG/MeA== <-- during addUrl()
+ encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
+ encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
+ encrypted string check: HiTpyY6MQaymlIYTjG/MeA==
+ encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
+ encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
+ encrypted string check: xVSJyEG49nLwTbVXTMLFZQ==
+ encrypted string check: Y3AcuvgaajD1sacWele5ug==
  The following are packages that have been rejected:
  300.300.300.300
  ** testUrls() Passed **
  Testing unknown packets:
- url1: 255.118.165.246 <-- randomly generated
- url3: 143.131.450.486 <-- randomly generated
+ encrypted string check: HiTpyY6MQaymlIYTjG/MeA==
+ encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
+ encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
+ url1: 136.206.138.185 <-- randomly generated url
+ url3: 342.28.423.25 <-- randomly generated url
  The following are packages that have been rejected:
  300.300.300.300
- 143.131.450.486J <-- randomly generated
+ 342.28.423.25iMV <-- randomly generated url
  url2: 1.1.1.1
+ encrypted string check: 7FemYmB9GDIQq+oHq7tqPg==
  ** testPacketInputs() Passed **
  */
 public class MainTest {
@@ -39,10 +51,10 @@ public class MainTest {
     public void testUrls() {
         System.out.println("Testing known URLS:");
         try {
-            FireWallController ac = new FireWallController();
+            AccessListController ac = new AccessListController();
             Logger log = new Logger();
 
-            // testing valid urls that already are in the AccessList
+            // testing valid urls that already are in the Firewall
             String url1 = "128.60.25.3";
             Assertions.assertEquals(url1, ac.checkPacket(url1));
             Assertions.assertTrue(ac.hasAccess(url1));
@@ -55,7 +67,7 @@ public class MainTest {
             Assertions.assertEquals(url3, ac.checkPacket(url3));
             Assertions.assertTrue(ac.hasAccess(url3));
 
-            // testing invalid urls that are not in the AccessList
+            // testing invalid urls that are not in the Firewall
             String url4 = "0.0.0.0";
             Assertions.assertFalse(ac.hasAccess(url4));
             Assertions.assertEquals(url4, ac.checkPacket(url4));
@@ -82,7 +94,7 @@ public class MainTest {
     public void testPacketInputs() {
         System.out.println("Testing unknown packets:");
         try {
-            FireWallController ac = new FireWallController();
+            AccessListController ac = new AccessListController();
             Logger log = new Logger();
 
             // testing random packets generator
