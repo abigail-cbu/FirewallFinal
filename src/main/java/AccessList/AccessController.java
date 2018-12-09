@@ -10,12 +10,12 @@ public class AccessController {
     /**
      * Adds url to saved list.
      *
-     * @param url
+     * @param packageList
      * @return true if url was added to the list
      */
-    public boolean addUrl(String url) {
-        if (accessList.size() == 0 || !accessList.contains(url)) {
-            accessList.add(url);
+    public boolean addUrl(Object packageList) {
+        if (accessList.size() == 0 || !accessList.contains(packageList)) {
+            accessList.add(packageList);
             return true;
         }
 
