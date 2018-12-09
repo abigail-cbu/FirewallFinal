@@ -31,11 +31,15 @@ public class AccessController {
      *
      * @param packet
      */
-    public boolean addressExtractor(Object packet) throws Exception {
+    public String addressExtractor(Object packet) throws Exception {
 
+        // always get the 1st 16 characters of the packet
         String ipAddress = StringUtils.substring(packet.toString(), 0, IP_MAX_LENGTH);
 
-        return addUrl(ipAddress);
+        // fix url if contains characters at the end
+        ipAddress = removeBadCharactersFromIP(ipAddress);
+
+        return ipAddress;
     }
 
     /**
@@ -44,13 +48,13 @@ public class AccessController {
      * @param address
      * @return true if url was added to the list
      */
-    public boolean addUrl(Object address) throws Exception {
+    public boolean addUrl(String address) throws Exception {
         // 1. check if valid url / ip address
 
         // 2. encrypt url
 
         // 3. add url to AccessList
-        if (!accessList.contains(address) && validIP(address.toString())) {
+        if (validIP(address) && !accessList.contains(address)) {
             accessList.add(address);
             return true;
         }
@@ -83,6 +87,12 @@ public class AccessController {
         return Base64.encodeBase64(raw);
     }
 
+    /**
+     * Validates urls / ip addresses
+     *
+     * @param ip
+     * @return false if the parameter is empty or not a valid ip
+     */
     private boolean validIP(String ip) {
         try {
             if (ip == null || ip.length() == 0) {
@@ -92,6 +102,13 @@ public class AccessController {
             String[] parts = ip.split("\\.");
             if (parts.length != 4) {
                 return false;
+            }
+
+            // check for any letters in the ip address
+            for (int i = 0; i < 4; i++) {
+                if (parts[i].contains("[^\\d.]")) {
+                    return false;
+                }
             }
 
             for (String s : parts) {
@@ -108,5 +125,49 @@ public class AccessController {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Removes hanging characters from the 16 character pickup from the packet.
+     * Handles the following types of urls:
+     * 1.1.1.1aa
+     * 1.1.1.a11
+     * 1.1.1.1a1
+     *
+     * @param ip
+     * @return empty string if it is an invalid ip address,
+     * for example, if it found a character instead of numbers in the ip address
+     */
+    public String removeBadCharactersFromIP(String ip) {
+        String[] parts = ip.split("\\.");
+
+        for (int i = 0; i < 4; i++) {
+            if (parts[i].contains("[^\\d.]") && i < 3) {
+                return "";
+            } else {
+                boolean removeCharacters = false;
+                int index = 0;
+
+                // check if last parts number is valid
+                // this makes sure we don't have letters in ip address (i.e. 1.1.1.1aa or 1.1.1.a11 or 1.1.1.1a1)
+                while (index < parts[i].length() && !removeCharacters) {
+                    char c = parts[i].charAt(index);
+                    try {
+                        Integer.parseInt(String.valueOf(c));
+                        index++;
+                    } catch (NumberFormatException e) {
+                        removeCharacters = true;
+                    }
+                }
+
+                // remove characters if necessary from last parts number
+                String badCharacters = parts[i].substring(index, parts[i].length());
+                parts[i].replaceAll(badCharacters, "");
+                if (parts[i].length() == 0) {
+                    return "";
+                }
+            }
+        }
+        return Arrays.toString(parts); // returns fixed ip address
     }
 }
