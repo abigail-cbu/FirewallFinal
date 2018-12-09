@@ -51,8 +51,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="75">
-                <caret line="5" column="86" lean-forward="false" selection-start-line="5" selection-start-column="86" selection-end-line="5" selection-end-column="86" />
+              <first_editor relative-caret-position="719">
+                <caret line="48" column="11" lean-forward="false" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -63,7 +63,7 @@
       <file leaf-file-name="AccessListController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
+            <state relative-caret-position="1005">
               <caret line="108" column="54" lean-forward="false" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="54" />
               <folding>
                 <element signature="docComment;class#AccessListController#0" expanded="false" />
@@ -491,7 +491,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544316234192</updated>
-      <workItem from="1544316239844" duration="20329000" />
+      <workItem from="1544316239844" duration="20513000" />
     </task>
     <servers />
   </component>
@@ -517,8 +517,8 @@
     <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 44m 58s.xml">
       <configuration name="MainTest.testAllTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MainTest_testPacketInputs - 2018.12.09 at 02h 10m 27s.xml">
-      <configuration name="MainTest.testPacketInputs" configurationId="JUnit" />
+    <history-entry file="MainTest_testAllTests - 2018.12.09 at 15h 49m 11s.xml">
+      <configuration name="MainTest.testAllTests" configurationId="JUnit" />
     </history-entry>
     <history-entry file="MainTest_testPacketInputs - 2018.12.09 at 02h 12m 42s.xml">
       <configuration name="MainTest.testPacketInputs" configurationId="JUnit" />
@@ -528,7 +528,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20329000" />
+    <option name="totallyTimeSpent" value="20513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -630,26 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="108" column="54" lean-forward="false" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="54" />
-          <folding>
-            <element signature="docComment;class#AccessListController#0" expanded="false" />
-            <element signature="docComment;method#checkPacket#0;class#AccessListController#0" expanded="false" />
-            <element signature="docComment;method#addressExtractor#0;class#AccessListController#0" expanded="false" />
-            <element signature="method#addressExtractor#0;class#AccessListController#0" expanded="false" />
-            <element signature="docComment;method#hasAccess#0;class#AccessListController#0" expanded="false" />
-            <element signature="docComment;method#addUrl#0;class#AccessListController#0" expanded="false" />
-            <element signature="docComment;method#validIP#0;class#AccessListController#0" expanded="false" />
-            <element signature="method#validIP#0;class#AccessListController#0" expanded="false" />
-            <element signature="docComment;method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
-            <element signature="method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
-            <element signature="e#5448#5486#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/InitialAccessList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -678,11 +658,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Firewall/AccessListController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1005">
+          <caret line="108" column="54" lean-forward="false" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="54" />
+          <folding>
+            <element signature="docComment;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#checkPacket#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#addressExtractor#0;class#AccessListController#0" expanded="false" />
+            <element signature="method#addressExtractor#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#hasAccess#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#addUrl#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#validIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="method#validIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="docComment;method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="method#removeBadCharactersFromIP#0;class#AccessListController#0" expanded="false" />
+            <element signature="e#5448#5486#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="75">
-            <caret line="5" column="86" lean-forward="false" selection-start-line="5" selection-start-column="86" selection-end-line="5" selection-end-column="86" />
+          <first_editor relative-caret-position="719">
+            <caret line="48" column="11" lean-forward="false" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
             <folding />
           </first_editor>
           <second_editor />
