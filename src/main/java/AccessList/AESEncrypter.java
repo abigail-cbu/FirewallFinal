@@ -6,6 +6,9 @@ import javax.crypto.*;
 import javax.crypto.spec.*;
 import java.io.*;
 
+/**
+ * Modified form of AESEncrypter from book
+ */
 public class AESEncrypter {
 
     public static final int IV_SIZE = 16;  // 128 bits
@@ -13,17 +16,22 @@ public class AESEncrypter {
     public static final int BUFFER_SIZE = 1024; // 1KB
 
     Cipher cipher;
-    SecretKey secretKey;
+    SecretKey SECRET_KEY;
     AlgorithmParameterSpec ivSpec;
     byte[] buf = new byte[BUFFER_SIZE];
-    byte[] ivBytes = new byte [IV_SIZE];
+    byte[] ivBytes = new byte[IV_SIZE];
 
-    public AESEncrypter(SecretKey key) throws Exception {
-        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        secretKey = key;
+    private void initializeSecretKey() throws NoSuchAlgorithmException {
+        KeyGenerator kg = KeyGenerator.getInstance("AES");
+        kg.init(KEY_SIZE * 8);
+        SECRET_KEY = kg.generateKey();
     }
 
-    public void encrypt(InputStream in, OutputStream out)
+    public AESEncrypter() throws Exception {
+        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    }
+
+    public String encrypt(byte[] urlInBytes, OutputStream out)
             throws Exception {
 
         // create IV and write to output
@@ -31,16 +39,17 @@ public class AESEncrypter {
         out.write(ivBytes);
         ivSpec = new IvParameterSpec(ivBytes);
 
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec);
+        cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, ivSpec);
 
         // Bytes written to cipherOut will be encrypted
         CipherOutputStream cipherOut = new CipherOutputStream(out, cipher);
 
         // Read in the plaintext bytes and write to cipherOut to encrypt
         int numRead = 0;
-        while ((numRead = in.read(buf)) >= 0)
-            cipherOut.write(buf, 0, numRead);
+        cipherOut.write(urlInBytes, 0, numRead);
         cipherOut.close();
+
+        return cipherOut.toString();
     }
 
     public void decrypt(InputStream in, OutputStream out)
@@ -49,7 +58,7 @@ public class AESEncrypter {
         System.in.read(ivBytes);
         ivSpec = new IvParameterSpec(ivBytes);
 
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec);
+        cipher.init(Cipher.DECRYPT_MODE, SECRET_KEY, ivSpec);
 
         // Bytes read from in will be decrypted
         CipherInputStream cipherIn = new CipherInputStream(in, cipher);
@@ -61,51 +70,52 @@ public class AESEncrypter {
         out.close();
     }
 
-    public static byte [] createRandBytes(int numBytes)
+    public static byte[] createRandBytes(int numBytes)
             throws NoSuchAlgorithmException {
-        byte [] bytesBuffer = new byte [numBytes];
+        byte[] bytesBuffer = new byte[numBytes];
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         sr.nextBytes(bytesBuffer);
         return bytesBuffer;
     }
 
-    public static void main (String argv[]) throws Exception {
-        if (argv.length != 2)
-            usage();
+//    public static void main(String argv[]) throws Exception {
+//        if (argv.length != 2)
+//            usage();
+//
+//        String operation = argv[0];
+//        String keyFile = argv[1];
+//
+//        if (operation.equals("createkey")) {
+//        /* write key */
+//            FileOutputStream fos = new FileOutputStream(keyFile);
+//            KeyGenerator kg = KeyGenerator.getInstance("AES");
+//            kg.init(KEY_SIZE * 8);
+//            SecretKey skey = kg.generateKey();
+//            fos.write(skey.getEncoded());
+//            fos.close();
+//        } else {
+//	    /* read key */
+//            byte keyBytes[] = new byte[KEY_SIZE];
+//            FileInputStream fis = new FileInputStream(keyFile);
+//            fis.read(keyBytes);
+//            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
+//
+//	    /* initialize encrypter */
+//            AESEncrypter aes = new AESEncrypter(keySpec);
+//
+//            if (operation.equals("encrypt")) {
+//                aes.encrypt(System.in, System.out);
+//            } else if (operation.equals("decrypt")) {
+//                aes.decrypt(System.in, System.out);
+//            } else {
+//                usage();
+//            }
+//        }
+//    }
+//
+//    public static void usage() {
+//        System.err.println("java AESEncrypter createkey|encrypt|decrypt <keyfile>");
+//        System.exit(-1);
+//    }
 
-        String operation = argv[0];
-        String keyFile = argv[1];
-
-        if (operation.equals("createkey")) {
-	    /* write key */
-            FileOutputStream fos = new FileOutputStream(keyFile);
-            KeyGenerator kg = KeyGenerator.getInstance("AES");
-            kg.init(KEY_SIZE*8);
-            SecretKey skey = kg.generateKey();
-            fos.write(skey.getEncoded());
-            fos.close();
-        } else {
-	    /* read key */
-            byte keyBytes [] = new byte [KEY_SIZE];
-            FileInputStream fis = new FileInputStream(keyFile);
-            fis.read(keyBytes);
-            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
-
-	    /* initialize encrypter */
-            AESEncrypter aes = new AESEncrypter(keySpec);
-
-            if (operation.equals("encrypt")) {
-                aes.encrypt(System.in, System.out);
-            } else if (operation.equals("decrypt")) {
-                aes.decrypt(System.in, System.out);
-            } else {
-                usage();
-            }
-        }
-    }
-
-    public static void usage () {
-        System.err.println("java AESEncrypter createkey|encrypt|decrypt <keyfile>");
-        System.exit(-1);
-    }
 }
