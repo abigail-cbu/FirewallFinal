@@ -9,6 +9,20 @@ import java.util.Random;
  * Description: MainTest contains JUnits tests that will test the
  * AccessList package
  * and make sure that the project fulfills the requirements stated in the README.md file
+ *
+ * Output:
+ Testing known URLS:
+ The following are packages that have been rejected:
+ 300.300.300.300
+ ** testUrls() Passed **
+ Testing unknown packets:
+ url1: 255.118.165.246 <-- randomly generated
+ url3: 143.131.450.486 <-- randomly generated
+ The following are packages that have been rejected:
+ 300.300.300.300
+ 143.131.450.486J <-- randomly generated
+ url2: 1.1.1.1
+ ** testPacketInputs() Passed **
  */
 public class MainTest {
 
@@ -79,7 +93,7 @@ public class MainTest {
             Assertions.assertFalse(ac.hasAccess(ac.addressExtractor(packet1)));
 
             String url3 = generateRandomIPAddress(false);
-            System.out.println("url1: " + url3);
+            System.out.println("url3: " + url3);
             String packet3 = url3 + generateRandomPacketPayload();
             Assertions.assertEquals(url3, ac.addressExtractor(packet3));
             Assertions.assertFalse(ac.hasAccess(ac.addressExtractor(packet3)));
