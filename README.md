@@ -3,12 +3,12 @@ This course introduces you to security issues and current security software tool
 
 For your final exam you’ll look at one specific software tool, a firewall.  Please build your firewall from the following objects:
 
- 1. An Access list to keep URLs - Found in src/main/java/Firewall/FirewallController.java
+ 1. An Access list to keep URLs - Found in src/main/java/Firewall/AccessListController.java
  
         With a method to add a URL
         And a method to find a URL within the access list
 
- 2. A packet - Found in src/main/java/Firewall/FirewallController.java
+ 2. A packet - Found in src/main/java/Firewall/AccessListController.java
  
         Assume the packet format is a URL Address (16 characters) followed by the Packet Payload (64 characters)
         With a method to extract the URL address.
