@@ -6,8 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.io.FileOutputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * AccessList stores salted urls (code from miniPassword.java from Security book)
  */
-public class AccessController {
+public class FireWallController {
 
     private final int IP_MAX_LENGTH = 16;
     private List<Object> accessList = new ArrayList<Object>(Arrays.asList(
@@ -23,6 +22,24 @@ public class AccessController {
             "127.128.32.5",
             "61.110.4.11"
     ));
+
+    /**
+     * Checks packet against FireWall
+     *
+     * @param packet
+     * @return
+     * @throws Exception
+     */
+    public Object checkPacket(Object packet) throws Exception {
+        String address = addressExtractor(packet);
+        if (addUrl(address)) {
+            return packet;
+        } else {
+            Logger log = new Logger();
+            log.logReject(packet);
+            return address + " attempted to break firewall!!!";
+        }
+    }
 
     /**
      * Extracts a packet and parses it to get the Address and Payload.
@@ -48,18 +65,20 @@ public class AccessController {
      * @param address
      * @return true if url was added to the list
      */
-    public boolean addUrl(String address) throws Exception {
+    private boolean addUrl(String address) throws Exception {
         // 1. check if valid url / ip address
 
         // 2. encrypt url
 
         // 3. add url to AccessList
-        if (validIP(address) && !accessList.contains(address)) {
+        if (accessList.contains(address)) {
+            return true;
+        } else if (validIP(address)) {
             accessList.add(address);
             return true;
         }
 
-        return false; // the url wasn't added or was already added in the list
+        return false; // url wasn't added because it is invalid or already in the list
     }
 
     /**
@@ -129,6 +148,7 @@ public class AccessController {
 
     /**
      * Removes hanging characters from the 16 character pickup from the packet.
+     * Handles any urls within 16 characters.
      * Handles the following types of urls:
      * 1.1.1.1aa
      * 1.1.1.a11
@@ -138,36 +158,42 @@ public class AccessController {
      * @return empty string if it is an invalid ip address,
      * for example, if it found a character instead of numbers in the ip address
      */
-    public String removeBadCharactersFromIP(String ip) {
+    private String removeBadCharactersFromIP(String ip) {
         String[] parts = ip.split("\\.");
 
-        for (int i = 0; i < 4; i++) {
-            if (parts[i].contains("[^\\d.]") && i < 3) {
+        for (int i = 0; i < 3; i++) {
+            if (parts[i].contains("[^\\d.]")) {
                 return "";
-            } else {
-                boolean removeCharacters = false;
-                int index = 0;
-
-                // check if last parts number is valid
-                // this makes sure we don't have letters in ip address (i.e. 1.1.1.1aa or 1.1.1.a11 or 1.1.1.1a1)
-                while (index < parts[i].length() && !removeCharacters) {
-                    char c = parts[i].charAt(index);
-                    try {
-                        Integer.parseInt(String.valueOf(c));
-                        index++;
-                    } catch (NumberFormatException e) {
-                        removeCharacters = true;
-                    }
-                }
-
-                // remove characters if necessary from last parts number
-                String badCharacters = parts[i].substring(index, parts[i].length());
-                parts[i].replaceAll(badCharacters, "");
-                if (parts[i].length() == 0) {
-                    return "";
-                }
             }
         }
-        return Arrays.toString(parts); // returns fixed ip address
+
+        // check if last numbers contain any characters
+        if (!parts[3].matches("[0-9]+")) {
+            boolean removeCharacters = false;
+            int index = 0;
+
+            // check if last parts number is valid
+            // this makes sure we don't have letters in ip address (i.e. 1.1.1.1aa or 1.1.1.a11 or 1.1.1.1a1)
+            while (index < parts[3].length() && !removeCharacters) {
+                char c = parts[3].charAt(index);
+                try {
+                    Integer.parseInt(String.valueOf(c));
+                    index++;
+                } catch (NumberFormatException e) {
+                    removeCharacters = true;
+                }
+            }
+
+            // remove characters if necessary from last parts number
+            String badCharacters = parts[3].substring(index, parts[3].length());
+            parts[3] = parts[3].replaceAll(badCharacters, "");
+            if (parts[3].length() == 0) {
+                return "";
+            }
+
+        }
+
+        // return fixed ip address
+        return parts[0] + "." + parts[1] + "." + parts[2] + "." + parts[3];
     }
 }

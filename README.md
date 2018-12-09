@@ -3,17 +3,17 @@ This course introduces you to security issues and current security software tool
 
 For your final exam you’ll look at one specific software tool, a firewall.  Please build your firewall from the following objects:
 
- 1. An Access list to keep URLs
+ 1. An Access list to keep URLs - Found in src/main/java/AccessList/FirewallController.java
  
         With a method to add a URL
         And a method to find a URL within the access list
 
- 2. A packet
+ 2. A packet - Found in src/main/java/AccessList/FirewallController.java
  
         Assume the packet format is a URL Address (16 characters) followed by the Packet Payload (64 characters)
         With a method to extract the URL address.
 
- 3. A Log to keep rejected URL’s.
+ 3. A Log to keep rejected URL’s. - Found in Found in src/main/java/AccessList/Logger.java
  
         With a method that accepts a URL and stores it in a Log entry.
         The Log entry should be 16 characters long.
@@ -44,4 +44,4 @@ Grading Criteria:
 
                Max. 25 points for a correctly working program.
 
-               Max. 25 points for test cases run.
+               Max. 25 points for test cases run. - Found in src/test/java/MainTest.java
