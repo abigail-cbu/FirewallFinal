@@ -12,11 +12,6 @@ import AccessList.Logger;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        String url = "";
-        testUrls(url);
-    }
-
-    public static void testUrls(String url) throws Exception {
-
+        // JUnit Tests can be found under src/test/java/MainTest.java
     }
 }
