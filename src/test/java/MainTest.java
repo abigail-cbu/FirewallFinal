@@ -14,7 +14,6 @@ public class MainTest {
     public void testUrls() {
 
         try {
-
             AccessController ac = new AccessController();
 
             String url1 = "128.60.25.3";
@@ -31,12 +30,21 @@ public class MainTest {
 
             String url4 = "0.0.0.0";
             Assertions.assertFalse(ac.hasAccess(url4));
+            Assertions.assertTrue(ac.addUrl(url4));
+            Assertions.assertTrue(ac.hasAccess(url4));
 
             String url5 = "128.128.128.128";
             Assertions.assertFalse(ac.hasAccess(url5));
+            Assertions.assertTrue(ac.addUrl(url5));
+            Assertions.assertTrue(ac.hasAccess(url5));
 
         } catch (Exception ex) {
 
         }
+    }
+
+    @Test
+    public void testPacketInputs() {
+
     }
 }

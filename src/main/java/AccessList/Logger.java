@@ -13,6 +13,7 @@ public class Logger {
 
     /**
      * Adds package to list
+     *
      * @param packet
      */
     public void logReject(Object packet) {
@@ -24,7 +25,7 @@ public class Logger {
      */
     public void displayRejects() {
         System.out.println("The following are packages that have been rejected:");
-        for(Object reject : rejectedList) {
+        for (Object reject : rejectedList) {
             System.out.println(reject);
         }
     }
