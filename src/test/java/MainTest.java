@@ -1,5 +1,6 @@
 import Firewall.AccessListController;
 import Firewall.Logger;
+import Firewall.Packet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,32 +10,32 @@ import java.util.Random;
  * Description: MainTest contains JUnits tests that will test the
  * Firewall package
  * and make sure that the project fulfills the requirements stated in the README.md file
- *
+ * <p>
  * Output:
- Testing known URLS:
- encrypted string check: HiTpyY6MQaymlIYTjG/MeA== <-- during addUrl()
- encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
- encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
- encrypted string check: HiTpyY6MQaymlIYTjG/MeA==
- encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
- encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
- encrypted string check: xVSJyEG49nLwTbVXTMLFZQ==
- encrypted string check: Y3AcuvgaajD1sacWele5ug==
- The following are packages that have been rejected:
- 300.300.300.300
- ** testUrls() Passed **
- Testing unknown packets:
- encrypted string check: HiTpyY6MQaymlIYTjG/MeA==
- encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
- encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
- url1: 136.206.138.185 <-- randomly generated url
- url3: 342.28.423.25 <-- randomly generated url
- The following are packages that have been rejected:
- 300.300.300.300
- 342.28.423.25iMV <-- randomly generated url
- url2: 1.1.1.1
- encrypted string check: 7FemYmB9GDIQq+oHq7tqPg==
- ** testPacketInputs() Passed **
+ * Testing known URLS:
+ * encrypted string check: HiTpyY6MQaymlIYTjG/MeA== <-- during addUrl()
+ * encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
+ * encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
+ * encrypted string check: HiTpyY6MQaymlIYTjG/MeA==
+ * encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
+ * encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
+ * encrypted string check: xVSJyEG49nLwTbVXTMLFZQ==
+ * encrypted string check: Y3AcuvgaajD1sacWele5ug==
+ * The following are packages that have been rejected:
+ * 300.300.300.300
+ * * testUrls() Passed **
+ * Testing unknown packets:
+ * encrypted string check: HiTpyY6MQaymlIYTjG/MeA==
+ * encrypted string check: 5arPYTYbi7wmmZKzYcxR8w==
+ * encrypted string check: yaYLSnwqqDjOssHUw9VGPg==
+ * url1: 136.206.138.185 <-- randomly generated url
+ * url3: 342.28.423.25 <-- randomly generated url
+ * The following are packages that have been rejected:
+ * 300.300.300.300
+ * 342.28.423.25iMV <-- randomly generated url
+ * url2: 1.1.1.1
+ * encrypted string check: 7FemYmB9GDIQq+oHq7tqPg==
+ * * testPacketInputs() Passed **
  */
 public class MainTest {
 
@@ -42,7 +43,7 @@ public class MainTest {
     private final int BAD_BOUND = 500;
 
     @Test
-    public void testAllTests(){
+    public void testAllTests() {
         testUrls();
         testPacketInputs();
     }
@@ -96,17 +97,18 @@ public class MainTest {
         try {
             AccessListController ac = new AccessListController();
             Logger log = new Logger();
+            Packet packetCreation = new Packet();
 
             // testing random packets generator
-            String url1 = generateRandomIPAddress(true);
+            String url1 = packetCreation.generateRandomIPAddress(true);
             System.out.println("url1: " + url1);
-            String packet1 = url1 + generateRandomPacketPayload();
+            String packet1 = packetCreation.GeneratePacketWithKnownURL(url1);
             Assertions.assertEquals(url1, ac.addressExtractor(packet1));
             Assertions.assertFalse(ac.hasAccess(ac.addressExtractor(packet1)));
 
-            String url3 = generateRandomIPAddress(false);
+            String url3 = packetCreation.generateRandomIPAddress(false);
             System.out.println("url3: " + url3);
-            String packet3 = url3 + generateRandomPacketPayload();
+            String packet3 = packetCreation.GeneratePacketWithKnownURL(url3);
             Assertions.assertEquals(url3, ac.addressExtractor(packet3));
             Assertions.assertFalse(ac.hasAccess(ac.addressExtractor(packet3)));
 
@@ -120,7 +122,7 @@ public class MainTest {
             // testing known ips in packets
             String url2 = "1.1.1.1";
             System.out.println("url2: " + url2);
-            String packet2 = url2 + generateRandomPacketPayload();
+            String packet2 = packetCreation.GeneratePacketWithKnownURL(url2);
             Assertions.assertEquals(url2, ac.addressExtractor(packet2));
             Assertions.assertEquals(packet2, ac.checkPacket(packet2));
 
@@ -129,27 +131,5 @@ public class MainTest {
         } catch (Exception ex) {
             System.out.println("** testPacketInputs() Failed **");
         }
-    }
-
-    public String generateRandomIPAddress(boolean getGoodIPAddress) {
-        Random r = new Random();
-        if (getGoodIPAddress) {
-            return r.nextInt(GOOD_BOUND) + "." + r.nextInt(GOOD_BOUND) + "." + r.nextInt(GOOD_BOUND) + "." + r.nextInt(GOOD_BOUND);
-        } else {
-            return r.nextInt(BAD_BOUND) + "." + r.nextInt(BAD_BOUND) + "." + r.nextInt(BAD_BOUND) + "." + r.nextInt(BAD_BOUND);
-        }
-    }
-
-    public String generateRandomPacketPayload() {
-        String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        Random rnd = new Random();
-        int maxLength = 64;
-        StringBuilder sb = new StringBuilder(maxLength);
-
-        for (int i = 0; i < maxLength; i++) {
-            sb.append(AB.charAt(rnd.nextInt(AB.length())));
-        }
-
-        return sb.toString();
     }
 }
