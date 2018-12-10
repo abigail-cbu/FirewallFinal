@@ -8,7 +8,7 @@ For your final exam you’ll look at one specific software tool, a firewall.  Pl
         With a method to add a URL
         And a method to find a URL within the access list
 
- 2. A packet - **Found in src/main/java/Firewall/AccessListController.java**
+ 2. A packet - **Found in src/main/java/Firewall/Packet.java**
  
         Assume the packet format is a URL Address (16 characters) followed by the Packet Payload (64 characters)
         With a method to extract the URL address.
